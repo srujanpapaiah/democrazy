@@ -1,0 +1,428 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+
+<head>
+  <meta charset="utf-8">
+  <title> SignUp </title>
+  
+  <link href="https://fonts.googleapis.com/css?family=Lato:300,400,400italic,700,700italic,900,900italic" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Muli&display=swap" rel="stylesheet" />
+<link href="https://fonts.googleapis.com/css?family=Open+Sans:400,500&display=swap" rel="stylesheet" />
+</head>
+<style>
+
+
+* {
+  margin: 0;
+  padding: 0;
+box-sizing: border-box;
+}
+
+body {
+background-color: purple;
+font-family: 'Open Sans', sans-serif;
+display: flex;
+align-items: center;
+justify-content: center;
+min-height: 100vh;
+margin: 0;
+}
+
+.date-time {
+    display: flex;
+    min-height: 100vh;
+    font-family: 'Lato', sans-serif;
+    position:absolute;
+    left:900px;
+    top:20px;
+}
+
+
+
+.container {
+background-color:gray;
+border-radius: 5px;
+box-shadow: 0 50px 100px rgba(0, 0, 0, 0.6);
+overflow: hidden;
+width: 800px;
+max-width: 100%;
+margin-top: 80px;
+margin-bottom: 50px;
+}
+.date {
+    font-size: 24px;
+    font-weight: 500;
+    font-family: 'Lato', sans-serif;
+}
+    #printDate {
+      color: #e74c3c;
+    }
+    #printDay {
+      margin: 0 20px;
+      color: #ffffff;
+    }
+    #printTime {
+      color:  #2ecc71;
+    }
+
+
+.header {
+background-color: gray;
+padding: 20px 300px;
+}
+
+.header h2 {
+margin: 0;
+}
+
+.form {
+padding: 30px 40px;
+}
+
+.form-control {
+margin-bottom: 10px;
+padding-bottom: 20px;
+position: relative;
+}
+
+.form-control label {
+	display: inline-block;
+	margin-bottom: 5px;
+}
+
+.form-control input {
+  background: hsla(221, 35%, 45%, 0.336);
+  color: hsla(221, 35%, 45%, 0.336);
+  border-radius: 4px;
+  border: 1px solid #d1d1d1;
+  width: 100%;
+  box-shadow: inset 1px 2px 8px rgba(0, 0, 0, 0.02);
+  font-family: inherit;
+  font-size: 1em;
+  line-height: 1.45;
+  outline: none;
+  padding: 0.6em 1.45em 0.7em;
+  -webkit-transition: .18s ease-out;
+  -moz-transition: .18s ease-out;
+  -o-transition: .18s ease-out;
+  transition: .18s ease-out;
+}
+.form-control input:hover {
+    box-shadow: inset 0 0 8px rgba(0, 0, 0, 5.0);
+   }
+
+.form-control input:focus {
+    background-color: #525865;
+     color: #4b515d;
+     border: 1px solid #B8B6B6;
+     box-shadow: inset 0 1px 8px rgba(0, 0, 0, 0.2), 0 0 8px rgba(0, 0, 0, 0.2);
+}
+
+.form-control .success input {
+border-color: #2ecc71;
+}
+
+.form-control .error input {
+border-color: #e74c3c;
+}
+
+.form-control i {
+visibility: hidden;
+position: absolute;
+top: 40px;
+right: 10px;
+}
+
+.form-control .success .fa-check-circle {
+color: #2ecc71;
+visibility: visible;
+}
+
+.form-control .error .fa-exclamation-circle {
+color: #e74c3c;
+visibility: visible;
+}
+
+.form-control small {
+color: #e74c3c;
+position: absolute;
+bottom: 0;
+left: 0;
+visibility: hidden;
+}
+
+.form-control .error small {
+visibility: visible;
+}
+
+.form button {
+background-color: rgb(218, 101, 24);
+border-radius: 15px;
+color: #fff;
+display: block;
+font-family: inherit;
+font-size: 16px;
+padding: 10px;
+margin-top: 20px;
+width: 100%;
+cursor: pointer;
+outline: none;
+border: none;
+    }
+
+    .form button:hover {
+      background-color: #fff
+    }
+
+
+      ::placeholder {
+        color: rgb(81, 155, 224);
+        opacity: 1;
+        /* Firefox */
+      }
+
+
+
+
+
+</style>
+<body>
+
+  <div class="date-time">
+      <div class="date" id="printDate"></div>
+      <div class="date" id="printDay"></div>
+      <div class="date" id="printTime"></div>
+    </div>
+
+    <script type="text/javascript">
+      // Top Right Date and Time
+
+      var date = new Date();
+      const elementDate = document.getElementById("printDate");
+      const elementDay = document.getElementById("printDay");
+      const elementTime = document.getElementById("printTime");
+      const listOfDays = [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday"
+      ];
+
+      function printDate() {
+        var day = date.getDate();
+        var month = date.getMonth();
+        var year = date.getFullYear();
+
+        elementDate.innerHTML = day + " / " + month + " / " + year;
+      }
+
+      function printDay() {
+        date = new Date();
+        var numberOfDay = date.getDay();
+        var day = listOfDays[numberOfDay];
+        elementDay.innerHTML = day;
+      }
+
+      function printTime() {
+        date = new Date();
+        var hours = date.getHours();
+        var minutes = date.getMinutes();
+        var seconds = date.getSeconds();
+
+        if (seconds < 10) {
+          seconds = "0" + seconds;
+        }
+        if (minutes < 10) {
+          minutes = "0" + minutes;
+        }
+        if (hours > 12) {
+          hours = hours - 12;
+          elementTime.innerHTML = hours + " : " + minutes + " : " + seconds + "  PM ";
+        } else if (hours < 12) {
+          elementTime.innerHTML = hours + " : " + minutes + " : " + seconds + "  AM ";
+        } else if (hours = 12) {
+          elementTime.innerHTML = hours + " : " + minutes + " : " + seconds + "  PM ";
+        }
+      }
+
+      setInterval(function() {
+        printTime();
+        printDate();
+        printDay();
+      }, 1000);
+    </script>
+
+  <div class="container">
+    <div class="header">
+      <h2>Create Account</h2>
+    </div>
+    <form id="form" class="form">
+      <div class="form-control">
+        <input type="text" placeholder="Firstname" id="firstname" style="color:white !important;" onfocus="this.placeholder=''" onblur="this.placeholder='Firstname'" />
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error message</small>
+      </div>
+      <div class="form-control">
+        <input type="text" placeholder="Lastname" id="lastname" style="color:white !important;" onfocus="this.placeholder=''" onblur="this.placeholder='Lastname'" />
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error message</small>
+      </div>
+      <div class="form-control">
+        <input type="text" placeholder="Mobile" id="mobile" style="color:white !important;" onfocus="this.placeholder=''" onblur="this.placeholder='Mobile'" />
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error message</small>
+      </div>
+      <div class="form-control">
+        <input type="email" placeholder="Email" id="email" style="color:white !important;" onfocus="this.placeholder=''" onblur="this.placeholder='Email'" />
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error message</small>
+      </div>
+      <div class="form-control">
+        <input type="password" placeholder="Password" id="password" style="color:white !important;" onfocus="this.placeholder=''" onblur="this.placeholder='Password'" />
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error message</small>
+      </div>
+      <div class="form-control">
+        <input type="password" placeholder="Confirm Password" id="password2" style="color:white !important;" onfocus="this.placeholder=''" onblur="this.placeholder='Confirm Password'" />
+        <i class="fas fa-check-circle"></i>
+        <i class="fas fa-exclamation-circle"></i>
+        <small>Error message</small>
+      </div>
+      <div class="form-control">
+        <input type="date" id="birthday" style="color:black !important;">
+        <small>Error message</small>
+      </div>
+      <div>
+
+        <input type="radio" id="male" name="gender" value="male" required>
+        <label for="male">Male</label><br>
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label><br>
+        <input type="radio" id="other" name="gender" value="other">
+        <label for="other">Other</label>
+
+        <button>submit</button>
+    </form>
+  </div>
+  <script type="text/javascript">
+    // Validating form
+
+
+    const form = document.getElementById('form');
+    const firstname = document.getElementById('firstname');
+    const lastname = document.getElementById('lastname');
+    const mobile = document.getElementById('mobile');
+    const email = document.getElementById('email');
+    const password = document.getElementById('password');
+    const password2 = document.getElementById('password2');
+    const birthday = document.getElementById('birthday');
+
+    form.addEventListener('submit', e => {
+      e.preventDefault();
+
+      checkInputs();
+    });
+
+    function checkInputs() {
+      // trim to remove the whitespaces
+      const firstnameValue = firstname.value.trim();
+      const lastnameValue = lastname.value.trim();
+      const mobileValue = mobile.value.trim();
+      const emailValue = email.value.trim();
+      const passwordValue = password.value.trim();
+      const password2Value = password2.value.trim();
+      const birthdayValue = birthday.value;
+
+      if (firstnameValue === '') {
+        setErrorFor(firstname, 'Firstname cannot be blank');
+      } else if (!isName(firstnameValue)) {
+        setErrorFor(firstname, 'Enter alphabets only');
+      } else {
+        setSuccessFor(firstname);
+      }
+      if (lastnameValue === '') {
+        setErrorFor(lastname, 'Lastname cannot be blank');
+      } else if (!isName(lastnameValue)) {
+        setErrorFor(lastname, 'Enter alphabets only');
+      } else {
+        setSuccessFor(lastname);
+      }
+
+      if (mobileValue === '') {
+        setErrorFor(mobile, 'Mobile number cannot be blank');
+      } else if (!isMobile(mobileValue)) {
+        setErrorFor(mobile, 'Mobile number must be in the format (xxx xxx xxxx) or (xxx-xxx-xxxx) or (xxx.xxx.xxxx)');
+      } else {
+        setSuccessFor(mobile);
+      }
+
+      if (emailValue === '') {
+        setErrorFor(email, 'Email cannot be blank');
+      } else if (!isEmail(emailValue)) {
+        setErrorFor(email, 'Not a valid email');
+      } else {
+        setSuccessFor(email);
+      }
+
+      if (passwordValue === '') {
+        setErrorFor(password, 'Password cannot be blank');
+      } else if (!isPassword(passwordValue)) {
+        setErrorFor(password, 'Password must be between 6 to 20 characters');
+      } else {
+        setSuccessFor(password);
+      }
+
+      if (password2Value === '') {
+        setErrorFor(password2, 'You must confirm password');
+      } else if (passwordValue !== password2Value) {
+        setErrorFor(password2, 'Passwords does not match');
+      } else {
+        setSuccessFor(password2);
+      }
+
+      if (birthdayValue === '') {
+        setErrorFor(birthday, 'DOB cannot be blank');
+      } else {
+        setSuccessFor(birthday);
+      }
+    }
+
+    function setErrorFor(input, message) {
+      const formControl = input.parentElement;
+      const small = formControl.querySelector('small');
+      formControl.className = 'form-control error';
+      small.innerText = message;
+    }
+
+    function setSuccessFor(input) {
+      const formControl = input.parentElement;
+      formControl.className = 'form-control success';
+    }
+
+    function isName(firstname, lastname) {
+      return /^[A-Za-z]+$/.test(firstname, lastname);
+    }
+
+    function isMobile(mobile) {
+      return /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/.test(mobile);
+    }
+
+    function isEmail(email) {
+      return /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/.test(email);
+    }
+
+    function isPassword(password) {
+      return /^[A-Za-z]\w{6,20}$/.test(password);
+    }
+  </script>
+</body>
+
+</html>
