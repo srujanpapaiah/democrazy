@@ -4821,7 +4821,7 @@ if ("development" !== "production") {
     ].forEach(function (attributeName) {
       var name = attributeName.replace(CAMELIZE, capitalize);
       properties[name] = new PropertyInfoRecord(name, STRING, false, // mustUseProperty
-      attributeName, 'http://www.w3.org/1999/xlink', false);
+      attributeName, 'https://www.w3.org/1999/xlink', false);
     }); // String SVG attributes with the xml namespace.
 
     ['xml:base', 'xml:lang', 'xml:space' // NOTE: if you add a camelCased prop to this list,
@@ -4830,7 +4830,7 @@ if ("development" !== "production") {
     ].forEach(function (attributeName) {
       var name = attributeName.replace(CAMELIZE, capitalize);
       properties[name] = new PropertyInfoRecord(name, STRING, false, // mustUseProperty
-      attributeName, 'http://www.w3.org/XML/1998/namespace', false);
+      attributeName, 'https://www.w3.org/XML/1998/namespace', false);
     }); // These attribute exists both in HTML and SVG.
     // The attribute name is case-sensitive in SVG so we can't just use
     // the React name like we do for attributes that exist only in HTML.
@@ -4845,7 +4845,7 @@ if ("development" !== "production") {
 
     var xlinkHref = 'xlinkHref';
     properties[xlinkHref] = new PropertyInfoRecord('xlinkHref', STRING, false, // mustUseProperty
-    'xlink:href', 'http://www.w3.org/1999/xlink', true);
+    'xlink:href', 'https://www.w3.org/1999/xlink', true);
     ['src', 'href', 'action', 'formAction'].forEach(function (attributeName) {
       properties[attributeName] = new PropertyInfoRecord(attributeName, STRING, false, // mustUseProperty
       attributeName.toLowerCase(), // attributeName
