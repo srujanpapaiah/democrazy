@@ -5893,9 +5893,9 @@ if ("development" !== "production") {
       updateWrapper$1(element, props);
     }
 
-    var HTML_NAMESPACE = 'http://www.w3.org/1999/xhtml';
-    var MATH_NAMESPACE = 'http://www.w3.org/1998/Math/MathML';
-    var SVG_NAMESPACE = 'http://www.w3.org/2000/svg';
+    var HTML_NAMESPACE = 'https://www.w3.org/1999/xhtml';
+    var MATH_NAMESPACE = 'https://www.w3.org/1998/Math/MathML';
+    var SVG_NAMESPACE = 'https://www.w3.org/2000/svg';
     var Namespaces = {
       html: HTML_NAMESPACE,
       mathml: MATH_NAMESPACE,
