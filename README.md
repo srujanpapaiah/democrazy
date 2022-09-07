@@ -1,3 +1,4 @@
-# Democrazy-Network
-Democrazy Blockchain 
- b0.1
+# Democrazy
+-- PoW Blockahin built in JavaScript.
+-- Bitcoin blockchain consensus mechanism is replicated here.
+-- Bothe Frontend and Backned part of the project is built using MERN Stack.
