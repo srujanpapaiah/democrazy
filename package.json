@@ -43,7 +43,7 @@
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
     "react-dom": "^18.2.0",
-    "react-router-dom": "^6.8.0",
+    "react-router-dom": "^6.10.0",
     "redi": "^0.1.0",
     "redis": "^4.6.4",
     "request": "^2.88.0",
