@@ -47,7 +47,7 @@
     "redi": "^0.1.0",
     "redis": "^4.6.10",
     "request": "^2.88.0",
-    "terser": "^5.16.3",
+    "terser": "^5.22.0",
     "uuid": "^9.0.0"
   },
   "description": ""
