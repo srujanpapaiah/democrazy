@@ -45,7 +45,7 @@
     "react-dom": "^18.2.0",
     "react-router-dom": "^6.17.0",
     "redi": "^0.1.0",
-    "redis": "^4.6.10",
+    "redis": "^4.6.11",
     "request": "^2.88.0",
     "terser": "^5.22.0",
     "uuid": "^9.0.1"
