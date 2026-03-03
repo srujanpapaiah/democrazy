@@ -1,7 +1,6 @@
-const bodyParser = require("body-parser");
 const express = require("express");
-const request = require("request");
 const path = require("path");
+const { rateLimit } = require("express-rate-limit");
 const Blockchain = require("./blockchain");
 const PubSub = require("./app/pubsub");
 const TransactionPool = require("./wallet/transaction-pool");
@@ -20,9 +19,8 @@ const transactionMiner = new TransactionMiner({
   pubsub,
 });
 
-// set up rate limiter: maximum of five requests per minute
-const RateLimit = require("express-rate-limit");
-const limiter = new RateLimit({
+// Rate limiter: maximum of five requests per minute
+const limiter = rateLimit({
   windowMs: 1 * 60 * 1000, // 1 minute
   max: 5,
 });
@@ -33,7 +31,7 @@ app.use(limiter);
 const DEFAULT_PORT = 3000;
 const ROOT_NODE_ADDRESS = `http://localhost:${DEFAULT_PORT}`;
 
-app.use(bodyParser.json());
+app.use(express.json());
 app.use(express.static(path.join(__dirname, "client/dist")));
 
 app.get("/api/blocks", (req, res) => {
@@ -101,33 +99,33 @@ app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client/dist/index.html"));
 });
 
-const syncWithRootState = () => {
-  request(
-    { url: `${ROOT_NODE_ADDRESS}/api/blocks` },
-    (error, response, body) => {
-      if (!error && response.statusCode === 200) {
-        const rootChain = JSON.parse(body);
-
-        console.log("replace chain on a sync with", rootChain);
-        blockchain.replaceChain(rootChain);
-      }
+const syncWithRootState = async () => {
+  try {
+    const chainResponse = await fetch(`${ROOT_NODE_ADDRESS}/api/blocks`);
+    if (chainResponse.ok) {
+      const rootChain = await chainResponse.json();
+      console.log("replace chain on a sync with", rootChain);
+      blockchain.replaceChain(rootChain);
     }
-  );
+  } catch (error) {
+    console.error("Error syncing chain:", error.message);
+  }
 
-  request(
-    { url: `${ROOT_NODE_ADDRESS}/api/transaction-pool-map` },
-    (error, response, body) => {
-      if (!error && response.statusCode == 200) {
-        const rootTransactionPoolMap = JSON.parse(body);
-
-        console.log(
-          "replace transaction pool map on a sync with",
-          rootTransactionPoolMap
-        );
-        transactionPool.setMap(rootTransactionPoolMap);
-      }
+  try {
+    const poolResponse = await fetch(
+      `${ROOT_NODE_ADDRESS}/api/transaction-pool-map`
+    );
+    if (poolResponse.ok) {
+      const rootTransactionPoolMap = await poolResponse.json();
+      console.log(
+        "replace transaction pool map on a sync with",
+        rootTransactionPoolMap
+      );
+      transactionPool.setMap(rootTransactionPoolMap);
     }
-  );
+  } catch (error) {
+    console.error("Error syncing transaction pool:", error.message);
+  }
 };
 
 const walletFoo = new Wallet();

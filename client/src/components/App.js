@@ -1,26 +1,23 @@
-import React, { Component } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import logo from '../assets/logo.png';
 
-class App extends Component {
-    state = { walletInfo: {} };
+function App() {
+    const [walletInfo, setWalletInfo] = useState({});
 
-    componentDidMount() {
+    useEffect(() => {
         fetch(`${document.location.origin}/api/wallet-info`)
-        .then(response => response.json())
-        .then(json => this.setState({ walletInfo: json }));
-    }
+            .then(response => response.json())
+            .then(json => setWalletInfo(json));
+    }, []);
 
-    render() {
-        const { address, balance } = this.state.walletInfo;
+    const { address, balance } = walletInfo;
 
-        return (
-            <div className='App'>
-            <img className='logo' src={logo}></img>
+    return (
+        <div className='App'>
+            <img className='logo' src={logo} alt='logo' />
             <br />
-            <div>
-                 Welcome to the Blockchain...
-            </div>
+            <div>Welcome to the Blockchain...</div>
             <br />
             <div><Link to='/blocks'>Blocks</Link></div>
             <div><Link to='/conduct-transaction'>Conduct a Transaction</Link></div>
@@ -30,9 +27,8 @@ class App extends Component {
                 <div>Address: {address}</div>
                 <div>Balance: {balance}</div>
             </div>
-            </div>
-        );
-    }
+        </div>
+    );
 }
 
 export default App;
