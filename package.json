@@ -1,7 +1,6 @@
 {
   "name": "cryptochain",
   "version": "1.0.0",
-  "main": "index.js",
   "scripts": {
     "test": "jest --watchAll",
     "start": "npm run build-client && node index.js",
