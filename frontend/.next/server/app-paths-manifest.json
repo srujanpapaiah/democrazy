@@ -1,0 +1,8 @@
+{
+  "/auth/register/page": "app/auth/register/page.js",
+  "/blocks/page": "app/blocks/page.js",
+  "/transact/page": "app/transact/page.js",
+  "/pool/page": "app/pool/page.js",
+  "/docs/page": "app/docs/page.js",
+  "/docs/blockchain/page": "app/docs/blockchain/page.js"
+}
