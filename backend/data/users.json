@@ -1,0 +1,24 @@
+[
+  {
+    "id": "49dafc20-1804-11f1-af0e-c7d8ddfd8be1",
+    "username": "demo",
+    "email": "demo@test.com",
+    "passwordHash": "$2a$10$XvHhzSOyHJDlMJenM552heptv6JObDSTmKResknfrEga7ZxSQv102",
+    "walletKeys": {
+      "publicKey": "0456ffa900982e0c1efeadd0b7c3b68184329efff64d499acdf3500d8e65e5d70b16481ddee5a873eb847371ea2125b3fd2000e2349a310d9064e84f07b22779b2",
+      "privateKey": "fdc7eabb4213ea55d4601c53931d3222966ff92260c106405e1323702ec0b46b"
+    },
+    "createdAt": 1772654212322
+  },
+  {
+    "id": "e9771f70-1804-11f1-af0e-c7d8ddfd8be1",
+    "username": "alice",
+    "email": "alice@demo.com",
+    "passwordHash": "$2a$10$PwtCcUuX65pIgxMn05qDx.kJk0RcJxZVg8Nw5Jcv/8fj/aoikAThe",
+    "walletKeys": {
+      "publicKey": "045802b57644abb6e1ab4e4b6e106d44be7fbc5f99ab81e1687254129b9c950a65e3ebddbac2f6a0a12507a990ea07726e1667a49af1765106b56cd48c08772e83",
+      "privateKey": "233b66a82ecdf90c0b4918b51613d31a1877edcb513b8d8de431d6b6f4939138"
+    },
+    "createdAt": 1772654480103
+  }
+]
