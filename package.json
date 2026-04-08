@@ -43,7 +43,7 @@
     "history": "^4.10.1",
     "netmask": "^2.0.2",
     "parcel": "^2.10.1",
-    "pubnub": "^4.37.0",
+    "pubnub": "^7.4.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.9.1",
     "react-dom": "^18.2.0",
