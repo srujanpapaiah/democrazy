@@ -122,6 +122,28 @@ behaviour.
 npm test
 ```
 
+## Deployment
+
+`vercel.json` deploys the **client** as a static site: it builds with
+`npm run build:client` and serves `dist/client`, rewriting unmatched paths to
+`index.html` so client-side routes resolve. Requests under `/api` are excluded
+from that rewrite.
+
+The **node is not deployable to serverless**, and this is a property of the
+design rather than a configuration gap:
+
+- The chain, the transaction pool and the wallet keypair all live in process
+  memory (`src/index.ts`). Each serverless invocation may land on a fresh
+  instance, so the chain resets to the genesis block and the wallet address
+  changes between requests.
+- Proof-of-work mining is an unbounded loop (`Block.mineBlock`). As difficulty
+  climbs it will exceed any function execution limit.
+- The PubNub subscription needs a long-lived process to receive broadcasts.
+
+Run the node somewhere that keeps a process alive — Railway, Render, Fly.io or
+any VM — and point the client at it. Making it genuinely serverless would mean
+moving chain and pool state into a shared store such as Redis or Postgres.
+
 ## License
 
 ISC
