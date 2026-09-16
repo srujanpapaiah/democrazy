@@ -66,6 +66,19 @@ export const config = {
     windowMs: 60_000,
     max: 120,
   },
+
+  /**
+   * Origins allowed to call this node's API.
+   *
+   * When the client is hosted separately from the node — a static host for the
+   * client, a persistent host for the node — the browser blocks the call
+   * unless the node names that origin. Comma-separated; empty means
+   * same-origin only, which is correct when the node serves the client itself.
+   */
+  corsOrigins: (process.env['CORS_ORIGINS'] ?? '')
+    .split(',')
+    .map(origin => origin.trim())
+    .filter(Boolean),
 } as const;
 
 export type Config = typeof config;

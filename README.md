@@ -129,8 +129,8 @@ npm test
 `index.html` so client-side routes resolve. Requests under `/api` are excluded
 from that rewrite.
 
-The **node is not deployable to serverless**, and this is a property of the
-design rather than a configuration gap:
+The **node cannot run on serverless**, and that is a property of the design
+rather than a configuration gap:
 
 - The chain, the transaction pool and the wallet keypair all live in process
   memory (`src/index.ts`). Each serverless invocation may land on a fresh
@@ -140,9 +140,31 @@ design rather than a configuration gap:
   climbs it will exceed any function execution limit.
 - The PubNub subscription needs a long-lived process to receive broadcasts.
 
-Run the node somewhere that keeps a process alive — Railway, Render, Fly.io or
-any VM — and point the client at it. Making it genuinely serverless would mean
-moving chain and pool state into a shared store such as Redis or Postgres.
+So the node runs on Render (`render.yaml`), which keeps a process alive.
+
+### Deploying the node to Render
+
+1. Render dashboard → **New → Blueprint** → point it at this repo. It reads
+   `render.yaml` and creates a free web service.
+2. Once it has a URL, set **`CORS_ORIGINS`** on the service to the Vercel URL
+   serving the client, e.g. `https://democrazy.vercel.app`. Without it the
+   browser blocks every cross-origin request.
+
+The Render URL works standalone too — the node serves the built client from
+`dist/client`, so the whole app is reachable there without Vercel.
+
+### Pointing the Vercel client at the node
+
+Set **`VITE_API_BASE_URL`** in the Vercel project to the Render URL and
+redeploy. It is read at build time, so a redeploy is required for a change to
+take effect. Left unset, the client calls `/api` on its own origin.
+
+> **Free tier:** Render spins a free service down after ~15 minutes idle, and
+> the next request takes up to a minute while it wakes. The client surfaces
+> this rather than looking broken. Paid instances stay warm.
+
+Making the node genuinely serverless would instead mean moving chain and pool
+state into a shared store such as Redis or Postgres.
 
 ## License
 

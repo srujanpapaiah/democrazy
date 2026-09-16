@@ -1,6 +1,7 @@
 import { existsSync } from 'node:fs';
 import path from 'node:path';
 
+import cors from 'cors';
 import express, { type Express } from 'express';
 import { rateLimit } from 'express-rate-limit';
 import helmet from 'helmet';
@@ -34,6 +35,18 @@ export function createApp({ clientDir, ...deps }: CreateAppOptions): Express {
       },
     })
   );
+
+  // Only needed when the client is served from another origin. With no
+  // CORS_ORIGINS set this is a no-op, keeping the API same-origin by default.
+  if (config.corsOrigins.length > 0) {
+    app.use(
+      '/api',
+      cors({
+        origin: config.corsOrigins,
+        methods: ['GET', 'POST'],
+      })
+    );
+  }
 
   app.use(express.json({ limit: '1mb' }));
 

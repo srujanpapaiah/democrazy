@@ -16,6 +16,16 @@ interface ErrorBody {
 }
 
 /**
+ * Where the node lives.
+ *
+ * Empty by default, so requests go to `/api` on the current origin — correct
+ * for local dev (Vite proxies it) and for the node serving the client itself.
+ * Set `VITE_API_BASE_URL` at build time when the client is hosted apart from
+ * the node; the node must then list this client's origin in `CORS_ORIGINS`.
+ */
+const API_BASE = (import.meta.env.VITE_API_BASE_URL ?? '').replace(/\/+$/, '');
+
+/**
  * Performs a JSON request against the node.
  *
  * The node reports failures as `{ type: 'error', message }`, so the body is
@@ -26,12 +36,17 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
   let response: Response;
 
   try {
-    response = await fetch(`/api${path}`, {
+    response = await fetch(`${API_BASE}/api${path}`, {
       headers: { 'Content-Type': 'application/json' },
       ...init,
     });
   } catch {
-    throw new ApiError(0, 'Could not reach the node. Is it running?');
+    throw new ApiError(
+      0,
+      API_BASE
+        ? `Could not reach the node at ${API_BASE}. It may be starting up — free hosts sleep when idle and can take up to a minute to wake.`
+        : 'Could not reach the node. Is it running?'
+    );
   }
 
   if (!response.ok) {

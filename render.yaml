@@ -1,0 +1,38 @@
+# Render blueprint for the blockchain node.
+#
+# The node needs a process that stays alive: the chain, the transaction pool
+# and the wallet keypair live in memory, proof-of-work mining runs an unbounded
+# loop, and PubNub needs a long-lived subscriber. None of that survives on
+# serverless, which is why the node is hosted here rather than alongside the
+# client on Vercel.
+#
+# Deploy: Render dashboard -> New -> Blueprint -> point at this repo.
+services:
+  - type: web
+    name: democrazy-node
+    runtime: node
+    plan: free
+    region: oregon
+
+    buildCommand: npm ci && npm run build
+    startCommand: npm start
+
+    # Cheapest liveness probe: returns the chain height, not the whole chain.
+    healthCheckPath: /api/blocks/length
+
+    envVars:
+      - key: NODE_ENV
+        value: production
+
+      # Origins allowed to call this API — set this to the Vercel URL serving
+      # the client. Without it the browser blocks every cross-origin request.
+      - key: CORS_ORIGINS
+        sync: false
+
+      # Optional: peer-to-peer broadcast. The node runs standalone without them.
+      - key: PUBNUB_PUBLISH_KEY
+        sync: false
+      - key: PUBNUB_SUBSCRIBE_KEY
+        sync: false
+      - key: PUBNUB_SECRET_KEY
+        sync: false
