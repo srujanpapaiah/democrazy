@@ -1,2 +1,22 @@
+# Dependencies
 node_modules
+
+# Build output
+dist
+client/dist
+.cache
 .parcel-cache
+.vite
+
+# Test output
+coverage
+
+# Environment
+.env
+.env.local
+.env.*.local
+
+# Editor / OS
+.DS_Store
+*.log
+.breakpoints

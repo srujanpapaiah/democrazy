@@ -1,0 +1,10 @@
+dist
+coverage
+node_modules
+package-lock.json
+website
+*.pdf
+
+# Self-contained subprojects with their own formatting setup.
+backend
+frontend
