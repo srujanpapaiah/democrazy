@@ -1,0 +1,467 @@
+/*
+ * Design tokens. Bootstrap supplies the control primitives (buttons, inputs,
+ * grid); everything below is the app's own surface styling layered on top.
+ */
+:root {
+  --bg: #16181d;
+  --bg-elevated: #1e2128;
+  --bg-sunken: #121419;
+  --border: #2d313a;
+  --text: #eef0f4;
+  --text-muted: #9aa3b2;
+  --accent: #e5484d;
+  --accent-soft: rgba(229, 72, 77, 0.12);
+  --radius: 10px;
+  --gap: 1.25rem;
+
+  color-scheme: dark;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family:
+    'Quicksand',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    sans-serif;
+  font-size: 16px;
+  line-height: 1.6;
+  overflow-wrap: break-word;
+}
+
+/* Never remove a focus ring without replacing it — keyboard users rely on it. */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ---------- Shell -------------------------------------------------------- */
+
+.app-shell {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.app-header {
+  border-bottom: 1px solid var(--border);
+  background-color: var(--bg-sunken);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.app-header nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--gap);
+  padding-block: 0.875rem;
+  flex-wrap: wrap;
+}
+
+.brand {
+  font-size: 1.2rem;
+  font-weight: 600;
+  letter-spacing: 0.02em;
+  color: var(--text);
+  text-decoration: none;
+}
+
+.brand:hover {
+  color: var(--accent);
+}
+
+.nav-links {
+  display: flex;
+  gap: 0.35rem;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+.nav-link {
+  display: inline-block;
+  padding: 0.35rem 0.8rem;
+  border-radius: var(--radius);
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.95rem;
+}
+
+.nav-link:hover {
+  color: var(--text);
+  background-color: var(--bg-elevated);
+}
+
+.nav-link.is-active {
+  color: var(--accent);
+  background-color: var(--accent-soft);
+}
+
+.app-main {
+  flex: 1;
+  padding-block: 2rem 3rem;
+}
+
+.app-footer {
+  border-top: 1px solid var(--border);
+  padding-block: 1.25rem;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+}
+
+/* ---------- Layout primitives -------------------------------------------- */
+
+.stack {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+}
+
+.panel {
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+}
+
+.panel-title {
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.75rem;
+}
+
+.page-heading {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--gap);
+  flex-wrap: wrap;
+}
+
+.hero {
+  padding-block: 1rem 0.5rem;
+}
+
+.hero h1 {
+  font-size: clamp(1.9rem, 5vw, 2.6rem);
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.hero p {
+  max-width: 52ch;
+  margin: 0;
+}
+
+.hero-logo {
+  width: 96px;
+  height: 96px;
+  margin-bottom: 1rem;
+}
+
+/* ---------- Cards -------------------------------------------------------- */
+
+.card-grid {
+  display: grid;
+  gap: var(--gap);
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+}
+
+.action-card {
+  display: block;
+  background-color: var(--bg-elevated);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 1.1rem;
+  color: inherit;
+  text-decoration: none;
+  transition:
+    border-color 0.15s ease,
+    transform 0.15s ease;
+}
+
+.action-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-2px);
+  color: inherit;
+}
+
+.action-card h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  margin-bottom: 0.35rem;
+}
+
+.action-card p {
+  color: var(--text-muted);
+  font-size: 0.9rem;
+  margin: 0;
+}
+
+/* ---------- Wallet ------------------------------------------------------- */
+
+.wallet-info {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.4rem 1.25rem;
+  margin: 0;
+  align-items: baseline;
+}
+
+.wallet-info dt {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+}
+
+.wallet-info dd {
+  margin: 0;
+  min-width: 0;
+}
+
+.balance {
+  font-size: 1.6rem;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+/* ---------- Blocks & transactions ---------------------------------------- */
+
+.block-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  color: var(--text-muted);
+  font-size: 0.875rem;
+  margin-bottom: 0.6rem;
+}
+
+.block-index {
+  background-color: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 0.1rem 0.6rem;
+  font-weight: 600;
+}
+
+.block-difficulty {
+  margin-left: auto;
+}
+
+.block-meta {
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.25rem 1rem;
+  margin: 0 0 0.9rem;
+  align-items: baseline;
+}
+
+.block-meta dt {
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  font-weight: 500;
+}
+
+.block-meta dd {
+  margin: 0;
+  min-width: 0;
+}
+
+.block-transactions {
+  margin-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.transaction {
+  background-color: var(--bg-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem;
+}
+
+.transaction-from {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+  padding-bottom: 0.6rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.9rem;
+}
+
+.transaction-outputs {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  font-size: 0.9rem;
+}
+
+.transaction-outputs li {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.amount {
+  margin-left: auto;
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.badge-reward {
+  background-color: var(--accent-soft);
+  color: var(--accent);
+  border-radius: 999px;
+  padding: 0.1rem 0.7rem;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.label {
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+}
+
+.address,
+.hash {
+  font-family: ui-monospace, 'SF Mono', 'Cascadia Mono', Menlo, monospace;
+  font-size: 0.82rem;
+  color: var(--text);
+  background-color: rgba(255, 255, 255, 0.04);
+  border-radius: 4px;
+  padding: 0.1rem 0.4rem;
+  word-break: break-all;
+}
+
+/* ---------- Forms -------------------------------------------------------- */
+
+.form-panel {
+  max-width: 560px;
+}
+
+.field {
+  margin-bottom: 1rem;
+}
+
+.field label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+.form-control {
+  background-color: var(--bg-sunken);
+  border: 1px solid var(--border);
+  color: var(--text);
+}
+
+.form-control:focus {
+  background-color: var(--bg-sunken);
+  border-color: var(--accent);
+  color: var(--text);
+  box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+.form-control::placeholder {
+  color: #6b7280;
+}
+
+/* ---------- Status ------------------------------------------------------- */
+
+.status {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  border-radius: var(--radius);
+  padding: 0.7rem 0.9rem;
+  margin: 0;
+  font-size: 0.9rem;
+}
+
+.status--loading {
+  color: var(--text-muted);
+}
+
+.status--error {
+  background-color: var(--accent-soft);
+  border: 1px solid var(--accent);
+  color: var(--text);
+}
+
+.status--error button {
+  margin-left: auto;
+}
+
+.spinner {
+  width: 1rem;
+  height: 1rem;
+  border: 2px solid var(--border);
+  border-top-color: var(--accent);
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .spinner {
+    animation-duration: 3s;
+  }
+  .action-card {
+    transition: none;
+  }
+}
+
+.error-detail {
+  background-color: var(--bg-sunken);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.9rem;
+  color: var(--text-muted);
+  font-size: 0.85rem;
+  white-space: pre-wrap;
+}
+
+/* ---------- Pagination --------------------------------------------------- */
+
+.pagination {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.text-secondary {
+  color: var(--text-muted) !important;
+}

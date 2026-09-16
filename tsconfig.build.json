@@ -1,0 +1,10 @@
+/*
+ * Production build of the server.
+ *
+ * Separate from tsconfig.server.json so `npm run typecheck` still covers the
+ * test files while the shipped bundle excludes them.
+ */
+{
+  "extends": "./tsconfig.server.json",
+  "exclude": ["node_modules", "dist", "src/**/*.test.ts"]
+}
