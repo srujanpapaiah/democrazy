@@ -19,7 +19,7 @@
     "hex-to-binary": "^1.0.1",
     "jsonwebtoken": "^9.0.2",
     "pubnub": "^4.37.0",
-    "uuid": "^3.4.0"
+    "uuid": "^14.0.0"
   },
   "devDependencies": {
     "@types/bcryptjs": "^2.4.6",
